@@ -1,0 +1,44 @@
+Release Notes Nextion 8048K070 Version 4 Model 2
+-
+***** Note this is for the enhanced version as it uses the Real Time Clock on the DASH page.
+-
+- You must have the ON7LDS driver installed and working for this to fully work. Will work without, but nothing will be sent to the pi and no L3 data will be received.
+-
+MMDVM Page. No major changes. Cleaned up the code and added an MMDVM restart button.
+	- The MMDVM Restart button is currently  hidden. To have it enabled, edit MMDVM page and change vis b5,0 to vis b5,1
+	
+DMR Page. Significant changes. 
+	- I added the MMDVM restart button and it remains enabled. 
+	- Redisgned the graphics and went with black background to help with nightime viewing.
+		- Still has dimmer active, so you can set to max brigtness and to a minimum value of 5 (so screen does not totally disappear).
+	- Changed the frequency fields to show green for when it is receiving any RF
+		- Changes to red when it is transmitting (receiving a signal via the network). 
+		- Frequency next to each Time slot. Just for show to emulate a network device to show that it is transmitting. However, when it is red, it is transmitting on that timeslot.
+	- CPU Status is a pop-up. However, note that this too is for show as monitoring the data coming in, temp, frequency and load are not sent by Pi-star in DMR page.
+	- Home Button is a bit different. When clicked, it halts any serial data and then takes you to the home screen so you can look at the log. Then select DMR, and when you go back,
+		it restarts the serial data. The only issues are that you do not want to be on the MMDVM Page for long as when you return, you will have missed any data and most of the user fields
+		will be blank until it refreshes with new incoming data. 
+	- Data fields will resize fonts based on the size of the data recieved. For example, long names will be adjusted to fit in the name field.
+		
+DASH Page. New design. 
+	- Added real time clock. The time is reordered MM/DD/YYYY and in 24 hour format.
+	- The network time is also dislayed so you can check for any changes. 
+	- Added a display reset. This reboots the display only. May need to restart MMDVM or reboot the Pi.
+	- There is an MMDVM Update button, but it does not appear to work so it is currently hidden.
+	
+INFO Page. No real changes other than colors and background.
+
+FUTURE changes:
+	- Add features to change the time
+	- Show time in different timezones to include Zulu.
+	- remove the "1 N" and "2 N" from the Last Heard list
+	
+Other sizes/models: I plan to make something like this for the 3.5 and 4 inch screens, but a lot of the data will not be used as it would be difficult to see. 
+	- To make this work on the "T" version, you would have to remove the Real Time Clock code, then it should work. I've not tested it, but this uses a lot of memory, so 
+		I do not knokw if it will work well or work at all on the Basic screen.
+
+VIDEO: In the video you will notice that when I go to another screen and come back to DMR, some of the data fields are empty. This is a known bug and will take some code
+to fix. You will also see that in the LH list on MMDVM, the TOR (Time of Receipt) will be blank. This is due to leaving the DMR page and coming back. The data is not 
+stored when it leave as it may change while you are on another page. So know that if you do leave the DMR page and return, it will clean itself up with the next incomding
+signal. 
+	
